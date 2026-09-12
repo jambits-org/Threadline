@@ -42,7 +42,26 @@ The first workflow is ticket to reviewed PR:
 3. **Workflows over prompt roulette.** Developers choose familiar actions; the system packages context, expected outputs, and approvals.
 4. **Private exploration, deliberate sharing.** Personal agent chats remain private until a developer shares an idea to a ticket or project.
 5. **Draft first, mutate second.** The default is read-only research and drafts. Shared posts, PR creation, and any higher-risk write require an explicit approval.
-6. **Client-neutral by design.** The hosted product works by itself. MCP and local CLI adapters extend it to coding agents without making any vendor tool mandatory.
+6. **CLI-first and MCP-native.** Developers install one Threadline adapter into the coding agent they already use. Codex, Claude Code, Kiro, and IDE agents consume the same shared context and workflow contract.
+
+## CLI-First Installation
+
+Threadline is delivered as an NPM package and configured as an MCP server inside an existing coding agent:
+
+    Codex / Claude Code / Kiro
+                 ↓
+    local Threadline MCP adapter, installed through NPM
+                 ↓
+    shared Threadline control plane
+                 ↓
+    team engineering contract, memory, workflows, and approvals
+
+The planned first-run flow is:
+
+    npx @threadline/cli init
+    threadline mcp install --client <codex|claude-code|kiro>
+
+The CLI authenticates the developer, identifies the local repository, reads the repository contract, and installs or prints the smallest client-specific MCP configuration. Each client keeps its own approval behavior; Threadline never silently grants broad tool permissions.
 
 ## Repository Status
 

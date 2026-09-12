@@ -1,20 +1,22 @@
-# MCP and Optional CLI Adapters
+# MCP and CLI Adapters
 
 ## Critical Decision
 
-Do not make the product depend on a developer installing or using Codex, Claude Code, Kiro, or any other coding agent.
+Threadline is CLI-first: developers should be able to use it directly inside Codex, Claude Code, Kiro, and compatible coding agents. It should not privilege or lock the team into one of those clients.
 
-The hosted product must provide value through its GitHub, Jira, Slack/Discord, support, and web integrations. A developer can use the product from an existing ticket, pull request, or chat command even if they have no local AI CLI.
+The product is delivered through an installable local MCP adapter. The hosted control plane remains necessary because team memory, source connectors, authorization, approvals, and workflows are shared organization capabilities.
 
-MCP and local CLI adapters are optional acceleration paths for teams that already use coding agents.
+The product also remains usable from a ticket, pull request, or chat command when a developer is away from a local CLI.
 
 ## Integration Model
 
-    Hosted Dev AI Adoption Layer
+    Codex / Claude Code / Kiro
         ↓
-    Remote Dev Context MCP gateway
+    NPM-installed local Threadline MCP adapter
         ↓
-    Codex · Claude Code · Kiro · IDE agents · product specialists
+    Hosted Threadline control plane and remote MCP gateway
+        ↓
+    team engineering contract, evidence graph, approvals, and connectors
 
 The gateway exposes product-level domain tools, not raw vendor APIs:
 
@@ -30,9 +32,25 @@ The gateway exposes product-level domain tools, not raw vendor APIs:
 
 The server is a policy gateway. It is not a raw proxy for GitHub, Jira, Slack, Discord, or support APIs, and it is not the inbound webhook path.
 
+## NPM Installation Experience
+
+The planned package split is:
+
+| Package | Responsibility |
+| --- | --- |
+| @threadline/mcp | Local stdio MCP server used by coding-agent clients |
+| @threadline/cli | Login, repository discovery, configuration generation, diagnostics, and optional local checks |
+
+    npx @threadline/cli init
+    threadline mcp install --client codex
+    threadline mcp install --client claude-code
+    threadline mcp install --client kiro
+
+The install command should request user confirmation before writing a client configuration. It can also print the configuration for teams that manage their own dotfiles. The local MCP server reads the active repository and uncommitted worktree only when the developer invokes a local-context workflow.
+
 ## Coding-Agent Compatibility
 
-The first integration should be remote MCP over Streamable HTTP with OAuth and scope-limited tools. This lets supported clients consume the same team context without a bespoke extension for each client.
+The first integration should expose both a local stdio MCP adapter and a remote MCP endpoint with OAuth and scope-limited tools. This allows client compatibility without a bespoke product extension for each vendor.
 
 - Codex locally exposes MCP management commands through its CLI.
 - Claude Code exposes MCP configuration through its CLI.
@@ -40,16 +58,16 @@ The first integration should be remote MCP over Streamable HTTP with OAuth and s
 
 Client configuration is an adapter concern. The product contract is the same domain tool schema and policy model for every client.
 
-## Optional Local CLI
+## Local CLI
 
-Later, ship a thin Dev Brain CLI for local worktree context:
+The CLI is thin, but it is a primary developer experience. It owns only local convenience:
 
-    devbrain login
-    devbrain context <ticket-or-pr>
-    devbrain check
-    devbrain mcp install <client>
+    threadline login
+    threadline context <ticket-or-pr>
+    threadline check
+    threadline mcp install <client>
 
-The CLI can inspect uncommitted files, invoke local tests, and bridge a developer’s active repository to an approved workflow. It must be optional: its absence cannot prevent normal hosted-product usage.
+The CLI can inspect uncommitted files, invoke local tests, and bridge a developer’s active repository to an approved workflow. Its absence cannot prevent normal hosted-product usage, but it is the recommended path for developers using a coding CLI.
 
 The CLI should not contain the causal graph, authorization policy, workflow state, or connector credentials. Those remain in the hosted control plane.
 
