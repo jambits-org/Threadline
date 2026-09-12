@@ -41,12 +41,12 @@ The planned package split is:
 | @threadline/mcp | Local stdio MCP server used by coding-agent clients |
 | @threadline/cli | Login, repository discovery, configuration generation, diagnostics, and optional local checks |
 
-    npx @threadline/cli init
-    threadline mcp install --client codex
-    threadline mcp install --client claude-code
-    threadline mcp install --client kiro
+    npx @jambits/threadline init
+    threadline mcp config codex
+    threadline mcp config claude-code
+    threadline mcp config kiro
 
-The install command should request user confirmation before writing a client configuration. It can also print the configuration for teams that manage their own dotfiles. The local MCP server reads the active repository and uncommitted worktree only when the developer invokes a local-context workflow.
+The configuration command prints the smallest client-specific MCP configuration for teams to review and add themselves. The local MCP server reads the active repository and uncommitted worktree only when the developer invokes a local-context workflow.
 
 ## Coding-Agent Compatibility
 
@@ -65,7 +65,7 @@ The CLI is thin, but it is a primary developer experience. It owns only local co
     threadline login
     threadline context <ticket-or-pr>
     threadline check
-    threadline mcp install <client>
+    threadline mcp config <client>
 
 The CLI can inspect uncommitted files, invoke local tests, and bridge a developer’s active repository to an approved workflow. Its absence cannot prevent normal hosted-product usage, but it is the recommended path for developers using a coding CLI.
 

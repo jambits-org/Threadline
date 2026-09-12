@@ -58,14 +58,27 @@ Threadline is delivered as an NPM package and configured as an MCP server inside
 
 The planned first-run flow is:
 
-    npx @threadline/cli init
-    threadline mcp install --client <codex|claude-code|kiro>
+    npx @jambits/threadline init
+    threadline mcp config <codex|claude-code|kiro>
 
-The CLI authenticates the developer, identifies the local repository, reads the repository contract, and installs or prints the smallest client-specific MCP configuration. Each client keeps its own approval behavior; Threadline never silently grants broad tool permissions.
+The CLI identifies the local repository, reads the repository contract, and prints the smallest client-specific MCP configuration. Each client keeps its own approval behavior; Threadline never silently grants broad tool permissions.
 
 ## Repository Status
 
-This is a public design and implementation-planning repository. It defines the product boundary, system design, technology choices, and a focused MVP before application code is added.
+This repository now includes the first local MVP: an NPM-installable CLI and stdio MCP server that discovers a repository’s engineering contract and builds context from local Git history. Hosted source connectors and shared organization memory require configured organization credentials and are the next implementation phase.
+
+## Local Development
+
+    npm install
+    npm run build
+    node dist/cli.js init
+    node dist/cli.js contract
+    node dist/cli.js context authentication
+    node dist/cli.js mcp config codex
+
+For an MCP client, configure its local server command to:
+
+    npx -y @jambits/threadline mcp serve
 
 ## Documentation
 
