@@ -1,6 +1,6 @@
-# Dev AI Adoption Layer
+# Threadline
 
-The AI adoption layer for software teams.
+The shared reasoning layer for software teams.
 
 It learns from how a team already delivers software and turns that context into cited, safe, repeatable workflows. It is designed to reduce the context tax around engineering work without replacing a team’s architecture, code practices, or existing tools.
 
@@ -63,4 +63,3 @@ This is a public design and implementation-planning repository. It defines the p
 - Automatically mining every private conversation into company memory.
 - Imposing a universal code architecture or review rubric.
 - Autonomous merge, production deploy, permission change, or destructive action.
-

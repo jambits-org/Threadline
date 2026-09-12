@@ -1,4 +1,4 @@
-# High-Level Product Design
+# Threadline: High-Level Product Design
 
 ## Four Actions
 
@@ -66,4 +66,3 @@ The shared space stores proposals, constraints, decisions, open questions, exper
 | Create a branch or draft PR | explicit approval during initial adoption |
 | Post to a shared channel or update a work item | named approver and policy |
 | Merge, deploy, delete data, or change permissions | outside MVP; existing controls remain authoritative |
-
