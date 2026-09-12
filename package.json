@@ -2,9 +2,23 @@
   "name": "@jambits/threadline",
   "version": "0.1.0",
   "description": "Repository-aware MCP context and workflow tooling for engineering teams.",
+  "keywords": [
+    "mcp",
+    "coding-agent",
+    "developer-tools",
+    "repository-context"
+  ],
+  "homepage": "https://github.com/jambits-org/Threadline#readme",
+  "bugs": {
+    "url": "https://github.com/jambits-org/Threadline/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jambits-org/Threadline.git"
+  },
   "type": "module",
   "bin": {
-    "threadline": "./dist/cli.js"
+    "threadline": "dist/cli.js"
   },
   "files": [
     "dist"
