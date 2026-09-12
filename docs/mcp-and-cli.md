@@ -41,7 +41,7 @@ The planned package split is:
 | @threadline/mcp | Local stdio MCP server used by coding-agent clients |
 | @threadline/cli | Login, repository discovery, configuration generation, diagnostics, and optional local checks |
 
-    npx @jambits/threadline init
+    npx @maazbin/threadline init
     threadline mcp config codex
     threadline mcp config claude-code
     threadline mcp config kiro

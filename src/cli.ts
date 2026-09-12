@@ -98,7 +98,7 @@ async function runMcpCommand(argumentsList: string[]): Promise<void> {
       client: clientName,
       mcpServer: {
         command: "npx",
-        args: ["-y", "@jambits/threadline", "mcp", "serve"],
+        args: ["-y", "@maazbin/threadline", "mcp", "serve"],
       },
     });
     return;

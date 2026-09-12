@@ -1,5 +1,5 @@
 {
-  "name": "@jambits/threadline",
+  "name": "@maazbin/threadline",
   "version": "0.1.0",
   "description": "Repository-aware MCP context and workflow tooling for engineering teams.",
   "keywords": [
